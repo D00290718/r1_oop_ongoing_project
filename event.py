@@ -1,4 +1,5 @@
 from datetime import datetime
+from venue import Venue
 
 #Samuel Delaney - D00290718 - Student A
 
@@ -12,7 +13,7 @@ class Event:
             date,
             start_time,
             capacity: int,
-            venue,
+            venue: Venue,
             cancelled: bool,
             ticket_price: float
 
@@ -54,3 +55,12 @@ class Event:
             self.venue = new_venue #Redefine the old venue to be the new venue
             return True
         return False
+
+    def change_type(self, new_event_type):
+        if new_event_type in self.allowed_event_types:
+            #The new event type is allowed so now redefine the event type to be the new one
+            self.event_type = new_event_type
+            return True
+        #The new event type is not one of the valid options so just return False and don't change anything
+        return False
+    
