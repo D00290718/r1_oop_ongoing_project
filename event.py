@@ -20,6 +20,8 @@ class Event:
         self.event_id = event_id
         self.event_type = event_type
         self.capacity = capacity
+        self.date = date
+        self.start_time = start_time
 
         #raise ValueError will crash the program and tell the user a custom error message
         
@@ -36,6 +38,13 @@ class Event:
             raise ValueError("Event Capacity is too big for the Venue's Capacity")
 
         # Confirming the event type is an allowable value
-        allowed_event_types = ["workshop", "open day", "conference", "convention"]
-        if self.event_type not in allowed_event_types:
+        self.allowed_event_types = ["workshop", "open day", "conference", "convention"]
+        if self.event_type not in self.allowed_event_types:
             raise ValueError("This event type is not allowed. Allowed event types are: workshop, open day, conference, convention")
+
+    def update_schedule(self):
+        date_and_time = datetime.now()
+        date = datetime.date(date_and_time)
+        time = datetime.time(date_and_time)
+        self.date = date
+        self.start_time = time
