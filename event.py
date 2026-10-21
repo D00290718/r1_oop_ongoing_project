@@ -44,7 +44,13 @@ class Event:
 
     def update_schedule(self):
         date_and_time = datetime.now()
-        date = datetime.date(date_and_time)
-        time = datetime.time(date_and_time)
-        self.date = date
-        self.start_time = time
+        date = datetime.date(date_and_time) #Get current date
+        time = datetime.time(date_and_time) #Get current time
+        self.date = date #Redefine the old date to be the new current date
+        self.start_time = time #Redefine the old time to be the new current time
+
+    def change_venue(self, new_venue):
+        if new_venue.capacity >= self.capacity: #If the new venue has enough space for the capacity
+            self.venue = new_venue #Redefine the old venue to be the new venue
+            return True
+        return False
