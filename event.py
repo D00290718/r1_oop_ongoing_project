@@ -77,10 +77,7 @@ class Event:
             #The event date is in the future, so it's ok to cancel now
             self.cancelled = True
             return True
-
-        print(self.date, self.start_time)
-        print(self.date, current_date)
-        print(self.start_time, current_time)
+        
         if self.date == current_date:
             #The event is on today so let's make sure the event hasn't already started before cancelling
             if self.start_time > current_time:
