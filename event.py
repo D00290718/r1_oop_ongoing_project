@@ -1,5 +1,5 @@
-from datetime import datetime
 from venue import Venue
+import datetime
 
 #Samuel Delaney - D00290718 - Student A
 
@@ -23,6 +23,7 @@ class Event:
         self.capacity = capacity
         self.date = date
         self.start_time = start_time
+        self.cancelled = cancelled
 
         #raise ValueError will crash the program and tell the user a custom error message
         
@@ -44,9 +45,9 @@ class Event:
             raise ValueError("This event type is not allowed. Allowed event types are: workshop, open day, conference, convention")
 
     def update_schedule(self):
-        date_and_time = datetime.now()
-        date = datetime.date(date_and_time) #Get current date
-        time = datetime.time(date_and_time) #Get current time
+        date_and_time = datetime.datetime.now()
+        date = datetime.datetime.date(date_and_time) #Get current date
+        time = datetime.datetime.time(date_and_time) #Get current time
         self.date = date #Redefine the old date to be the new current date
         self.start_time = time #Redefine the old time to be the new current time
 
@@ -64,3 +65,27 @@ class Event:
         #The new event type is not one of the valid options so just return False and don't change anything
         return False
     
+    def cancel_event(self):
+        current_date_and_time = datetime.datetime.now()
+        current_date = datetime.datetime.date(current_date_and_time) #Get current date
+        current_time = datetime.datetime.time(current_date_and_time) #Get current time
+
+        if self.cancelled: #The event is already cancelled so just return False
+            return False
+
+        if self.date > current_date:
+            #The event date is in the future, so it's ok to cancel now
+            self.cancelled = True
+            return True
+
+        print(self.date, self.start_time)
+        print(self.date, current_date)
+        print(self.start_time, current_time)
+        if self.date == current_date:
+            #The event is on today so let's make sure the event hasn't already started before cancelling
+            if self.start_time > current_time:
+                #Event hasn't started yet so we are safe to cancel now
+                self.cancelled = True
+                return True
+
+        return False
