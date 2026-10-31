@@ -10,14 +10,14 @@ class Event:
             event_id: int,
             title: str,
             event_type: str,
-            date,
-            start_time,
+            date: datetime.date,
+            start_time: datetime.time,
             capacity: int,
             venue: Venue,
             cancelled: bool,
             ticket_price: float
 
-        ):
+        ) -> None:
         self.event_id = event_id
         self.title = title
         self.event_type = event_type
@@ -47,20 +47,20 @@ class Event:
         if self.event_type not in self.allowed_event_types:
             raise ValueError("This event type is not allowed. Allowed event types are: workshop, open day, conference, convention")
 
-    def update_schedule(self):
+    def update_schedule(self) -> None:
         date_and_time = datetime.datetime.now()
         date = datetime.datetime.date(date_and_time) #Get current date
         time = datetime.datetime.time(date_and_time) #Get current time
         self.date = date #Redefine the old date to be the new current date
         self.start_time = time #Redefine the old time to be the new current time
 
-    def change_venue(self, new_venue):
+    def change_venue(self, new_venue: Venue) -> bool:
         if new_venue.capacity >= self.capacity: #If the new venue has enough space for the capacity
             self.venue = new_venue #Redefine the old venue to be the new venue
             return True
         return False
 
-    def change_type(self, new_event_type):
+    def change_type(self, new_event_type) -> bool:
         if new_event_type in self.allowed_event_types:
             #The new event type is allowed so now redefine the event type to be the new one
             self.event_type = new_event_type
@@ -68,7 +68,7 @@ class Event:
         #The new event type is not one of the valid options so just return False and don't change anything
         return False
     
-    def cancel_event(self):
+    def cancel_event(self) -> bool:
         current_date_and_time = datetime.datetime.now()
         current_date = datetime.datetime.date(current_date_and_time) #Get current date
         current_time = datetime.datetime.time(current_date_and_time) #Get current time
@@ -90,5 +90,5 @@ class Event:
 
         return False
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Event ID: {self.event_id}\nTitle: {self.title}\nEvent Type: {self.event_type}\nDate: {self.date}\nStart Time: {self.start_time}\nCapacity: {self.capacity}\nVenue: {self.venue.name}\nCancelled: {self.cancelled}\nTicket Price: €{self.ticket_price:.2f}\n"
