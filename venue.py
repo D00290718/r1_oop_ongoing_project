@@ -23,3 +23,13 @@ class Venue:
             raise ValueError("Capacity cannot be a negative number.")
         if self.capacity == 0: #There needs to be someone there for the purpose of the event
             raise ValueError("Capacity cannot be 0.")
+
+    def __str__(self) -> str:
+        """
+        Returns all of the information about the venue as a string.
+        
+        Returns:
+            str: The venue ID, name and capacity.
+        """
+
+        return f"Venue ID: {self.__venue_id}\nName: {self.name}\nCapacity: {self.capacity}\n"
