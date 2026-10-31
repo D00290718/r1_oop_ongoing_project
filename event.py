@@ -18,6 +18,21 @@ class Event:
             ticket_price: float
 
         ) -> None:
+
+        """
+        Initialises an Event class object
+
+        Args:
+            event_id (int): Unique ID number for the event
+            title (str): Title of the event
+            event_type (str): Type of event being organised
+            date (datetime.date): Date of the event
+            start_time (datetime.time): Start time of the event
+            capacity (int): Maximum number of people for the event
+            venue (Venue): Venue object where the event will be held
+            cancelled (bool): If the event has been cancelled or not
+            ticket_price (float): Price of a ticket for the event
+        """
         self.event_id = event_id
         self.title = title
         self.event_type = event_type
@@ -48,6 +63,9 @@ class Event:
             raise ValueError("This event type is not allowed. Allowed event types are: workshop, open day, conference, convention")
 
     def update_schedule(self) -> None:
+        """
+        Updates the event date and start time to the current date and time
+        """
         date_and_time = datetime.datetime.now()
         date = datetime.datetime.date(date_and_time) #Get current date
         time = datetime.datetime.time(date_and_time) #Get current time
@@ -55,12 +73,31 @@ class Event:
         self.start_time = time #Redefine the old time to be the new current time
 
     def change_venue(self, new_venue: Venue) -> bool:
+        """
+        Changes the venue only if it has enough capacity
+
+        Args:
+            new_venue (Venue): The new venue for the event
+
+        Returns:
+            bool: If venue was changed successfully, True will be returned and if not False will be returned
+        """
         if new_venue.capacity >= self.capacity: #If the new venue has enough space for the capacity
             self.venue = new_venue #Redefine the old venue to be the new venue
             return True
         return False
 
     def change_type(self, new_event_type: str) -> bool:
+        """
+        Changes the event type if the new type is listed in the allowed types.
+
+        Args:
+            new_event_type (str): The new event type
+
+        Returns:
+            bool: returns True if the event type was changed and if not return False
+        """
+
         if new_event_type in self.allowed_event_types:
             #The new event type is allowed so now redefine the event type to be the new one
             self.event_type = new_event_type
@@ -69,6 +106,13 @@ class Event:
         return False
     
     def cancel_event(self) -> bool:
+        """
+        Cancels the event only if it has not started yet.
+
+        Returns:
+            bool: returns True if the event was cancelled and if not will return False
+        """
+
         current_date_and_time = datetime.datetime.now()
         current_date = datetime.datetime.date(current_date_and_time) #Get current date
         current_time = datetime.datetime.time(current_date_and_time) #Get current time
@@ -91,4 +135,12 @@ class Event:
         return False
 
     def __str__(self) -> str:
+        """
+        Returns all the event information as a string.
+
+        Returns:
+            str: The event ID, title, type, date, time, capacity,
+                 venue, cancellation status and ticket price
+        """
+
         return f"Event ID: {self.event_id}\nTitle: {self.title}\nEvent Type: {self.event_type}\nDate: {self.date}\nStart Time: {self.start_time}\nCapacity: {self.capacity}\nVenue: {self.venue.name}\nCancelled: {self.cancelled}\nTicket Price: €{self.ticket_price:.2f}\n"
