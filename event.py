@@ -19,11 +19,14 @@ class Event:
 
         ):
         self.event_id = event_id
+        self.title = title
         self.event_type = event_type
         self.capacity = capacity
         self.date = date
         self.start_time = start_time
         self.cancelled = cancelled
+        self.ticket_price = ticket_price
+        self.venue = venue
 
         #raise ValueError will crash the program and tell the user a custom error message
         
@@ -86,3 +89,6 @@ class Event:
                 return True
 
         return False
+
+    def __str__(self):
+        return f"Event ID: {self.event_id}\nTitle: {self.title}\nEvent Type: {self.event_type}\nDate: {self.date}\nStart Time: {self.start_time}\nCapacity: {self.capacity}\nVenue: {self.venue.name}\nCancelled: {self.cancelled}\nTicket Price: €{self.ticket_price:.2f}\n"
