@@ -60,7 +60,7 @@ class Event:
             return True
         return False
 
-    def change_type(self, new_event_type) -> bool:
+    def change_type(self, new_event_type: str) -> bool:
         if new_event_type in self.allowed_event_types:
             #The new event type is allowed so now redefine the event type to be the new one
             self.event_type = new_event_type
