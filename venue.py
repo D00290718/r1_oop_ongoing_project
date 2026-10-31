@@ -14,7 +14,7 @@ class Venue:
 
         self.__venue_id = venue_id
         self.name = name
-        self.__capacity = capacity
+        self.capacity = capacity
 
         #raise ValueError will crash the program and tell the user a custom error message
         # Confirming the capacity is fit for purpose – a capacity cannot be negative
