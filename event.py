@@ -65,15 +65,16 @@ class Event:
         if self.event_type not in self.allowed_event_types:
             raise ValueError("This event type is not allowed. Allowed event types are: workshop, open day, conference, convention")
 
-    def update_schedule(self) -> None:
+    def update_schedule(self, new_date: datetime.date, new_start_time: datetime.time) -> None:
         """
-        Updates the event date and start time to the current date and time
+        Updates the event date and start time
+
+        Args:
+            new_date (datetime.date): The new date for the event
+            new_start_time (datetime.time): The new start time for the event
         """
-        date_and_time = datetime.datetime.now()
-        date = datetime.datetime.date(date_and_time) #Get current date
-        time = datetime.datetime.time(date_and_time) #Get current time
-        self.date = date #Redefine the old date to be the new current date
-        self.start_time = time #Redefine the old time to be the new current time
+        self.date = new_date
+        self.start_time = new_start_time
 
     def change_venue(self, new_venue: Venue) -> bool:
         """
