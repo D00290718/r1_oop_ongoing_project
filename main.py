@@ -1,6 +1,5 @@
-
-from venue import Venue
-from event import Event
+from event_system.venue import Venue
+from event_system.event import Event
 import datetime
 
 #-- 1. Set up a data set:
