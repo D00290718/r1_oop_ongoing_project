@@ -54,6 +54,9 @@ class Event:
 
         # Confirming the venue capacity if fit for purpose – the Venue must hold at least the capacity for this Event.
 
+        if not isinstance(venue, Venue): #Without this the next line would crash the program if a venue object was not given
+            raise ValueError("Please give a valid Venue object")
+
         if venue.get_capacity() < self.__capacity:
             raise ValueError("Event Capacity is too big for the Venue's Capacity")
 
@@ -82,6 +85,9 @@ class Event:
         Returns:
             bool: If venue was changed successfully, True will be returned and if not False will be returned
         """
+        #First let's make sure that the venue they pass into the function is a real Venue object and if not return False
+        if not isinstance(new_venue, Venue):
+            return False
         if new_venue.get_capacity() >= self.__capacity: #If the new venue has enough space for the capacity
             self.venue = new_venue #Redefine the old venue to be the new venue
             return True
