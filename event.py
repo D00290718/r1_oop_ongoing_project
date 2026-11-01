@@ -54,7 +54,7 @@ class Event:
 
         # Confirming the venue capacity if fit for purpose – the Venue must hold at least the capacity for this Event.
 
-        if venue.capacity < self.__capacity:
+        if venue.get_capacity() < self.__capacity:
             raise ValueError("Event Capacity is too big for the Venue's Capacity")
 
         # Confirming the event type is an allowable value
@@ -82,7 +82,7 @@ class Event:
         Returns:
             bool: If venue was changed successfully, True will be returned and if not False will be returned
         """
-        if new_venue.capacity >= self.__capacity: #If the new venue has enough space for the capacity
+        if new_venue.get_capacity() >= self.__capacity: #If the new venue has enough space for the capacity
             self.venue = new_venue #Redefine the old venue to be the new venue
             return True
         return False
