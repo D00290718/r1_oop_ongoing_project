@@ -33,10 +33,10 @@ class Event:
             cancelled (bool): If the event has been cancelled or not
             ticket_price (float): Price of a ticket for the event
         """
-        self.event_id = event_id
+        self.__event_id = event_id
         self.title = title
         self.event_type = event_type
-        self.capacity = capacity
+        self.__capacity = capacity
         self.date = date
         self.start_time = start_time
         self.cancelled = cancelled
@@ -47,14 +47,14 @@ class Event:
         
         # Confirming the capacity is fit for purpose – a capacity cannot be negative
 
-        if self.capacity < 0:
+        if self.__capacity < 0:
             raise ValueError("Capacity cannot be a negative number.")
-        if self.capacity == 0: #There needs to be someone there for the purpose of the event
+        if self.__capacity == 0: #There needs to be someone there for the purpose of the event
             raise ValueError("Capacity cannot be 0.")
 
         # Confirming the venue capacity if fit for purpose – the Venue must hold at least the capacity for this Event.
 
-        if venue.capacity < self.capacity:
+        if venue.capacity < self.__capacity:
             raise ValueError("Event Capacity is too big for the Venue's Capacity")
 
         # Confirming the event type is an allowable value
@@ -82,7 +82,7 @@ class Event:
         Returns:
             bool: If venue was changed successfully, True will be returned and if not False will be returned
         """
-        if new_venue.capacity >= self.capacity: #If the new venue has enough space for the capacity
+        if new_venue.capacity >= self.__capacity: #If the new venue has enough space for the capacity
             self.venue = new_venue #Redefine the old venue to be the new venue
             return True
         return False
@@ -143,4 +143,4 @@ class Event:
                  venue, cancellation status and ticket price
         """
 
-        return f"Event ID: {self.event_id}\nTitle: {self.title}\nEvent Type: {self.event_type}\nDate: {self.date}\nStart Time: {self.start_time}\nCapacity: {self.capacity}\nVenue: {self.venue.name}\nCancelled: {self.cancelled}\nTicket Price: €{self.ticket_price:.2f}\n"
+        return f"Event ID: {self.__event_id}\nTitle: {self.title}\nEvent Type: {self.event_type}\nDate: {self.date}\nStart Time: {self.start_time}\nCapacity: {self.__capacity}\nVenue: {self.venue.name}\nCancelled: {self.cancelled}\nTicket Price: €{self.ticket_price:.2f}\n"
