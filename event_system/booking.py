@@ -89,7 +89,7 @@ attendee1 = attendee(101, "Ali Khan", "ali@gmail.com")
 attendee2 = attendee(102, "Ahmed", "ahmed@gmail.com")
 
 # Assume you have already implemented Event
-event1 = Event(...)  # Supply the required Event constructor arguments
+event1 = Event((1, "DKIT Freshers Day One - Bingo n Beats", "convention", "2026, 9, 21", "22,00", 150, venue[0], "False", 15.000))  # Supply the required Event constructor arguments
 
 # Create booking
 booking1 = Booking(501, attendee1, event1)
