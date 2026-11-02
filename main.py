@@ -1,5 +1,7 @@
 from event_system.venue import Venue
 from event_system.event import Event
+from event_system.attendee import Attendee
+from event_system.booking import Booking
 import datetime
 
 #-- 1. Set up a data set:
@@ -77,12 +79,22 @@ events = [
 
 # Student B - D00262411 - Create 3 Attendees and store them in an appropriate data structure
 
-"..."
+attendees = [
+    attendee(1001, "Khizar Siddiqui", "khizar@gmail.com"),
+    attendee(1002, "Samuel Delaney", "sam@gmail.com"),
+    attendee(1003, "Mike Radcliffe", "mike@gmail.com")
+]
 
 # Student B - D00262411 - Create 5 Bookings and store them in an appropriate data structure
 # Student B - D00262411 - Each Booking should be link one of your Attendee objects with one of your Event objects
 
-"..."
+bookings = [
+    booking(601, attendees[0], event[2]),
+    booking(602, attendees[1], event[4]),
+    booking(603, attendees[2], event[1]),
+    booking(604, attendees[2], event[3]),
+    booking(605, attendees[0], event[0])
+]
 
 #-- 2. Display the information:
 
@@ -96,14 +108,27 @@ for venue in venues:
 
 # Student B - D00262411 - Display all Bookings, including who is attending and what Event is being held.
 
-"..."
+print("------------ All Bookings: ------------")
+
+for booking in bookings:
+    print(booking)
 
 #-- 3. Manipulate the information:
 
 # Student B - D00262411 - Attempt to change the email address on an Attendee to an invalid email, e.g. one without an @ or without a domain included.
 
-"..."
+print("------------ Invalid Email Update: ------------")
 
+attendee_to_update = attendee[0]
+
+print("\nBefore Update")
+print(attendee_to_update)
+
+email_result = attendee_to_update.update_email("khizarsiddiqui489.gmail.com")
+print("\nEmail updated Successfully")
+
+print("\nAfter Update")
+print(attendee_to_update)
 
 # Student A - D00290718 - Cancel an Event
 event_to_cancel = events[4]
@@ -114,7 +139,15 @@ print(f"------------ Event '{cancelled_event_title}' cancelled: {cancelled} ----
 
 # Student B - D00262411 - Cancel a Booking
 
-"..."
+booking_to_cancel = bookings[4]
+
+print("------------ Before Cancellation: ------------")
+print(booking_to_cancel)
+
+booking_to_cancel.cancel()
+
+print("------------ After Cancellation: ------------")
+print(booking_to_cancel)
 
 # Student A - D00290718 - Display all active Events (cancelled Events should not be shown)
 print("------------ Active Events: ------------")
@@ -125,8 +158,43 @@ for event in events:
 
 # Student B - D00262411 - Display all cancelled Bookings
 
-"..."
+print("------------ Cancelled Bookings: ------------")
+
+for booking in bookings:
+    if booking.cancelled:
+        print(booking)
 
 # Student B - D00262411 - Find and display all bookings for a specific Attendee
 
-"..."
+print("------------ Bookings for a Specific Attendee: ------------")
+
+attendee_to_find = attendees[3]
+
+print("Attendee:")
+print(attendee_to_find)
+
+found_booking = False
+
+for booking in bookings:
+    if booking.attendee.attendee_id == attendee_to_find.attendee_id:
+        print(booking)
+        print("--------------------------")
+
+        found_booking = True
+
+    if not found_booking:
+        print("No bookings found for this attendee")
+
+# Additional Demo: Change attendee on a booking
+
+print("------------ Change Booking Attendee: ------------")
+
+booking_to_update_2 = bookings[1]
+print("\nBefore Update")
+print(booking_to_update_2)
+
+update_result = booking_to_update_2.change_attendee(attendees[2])
+print("Attendee updated Successfully")
+
+print("\nAfter Update")
+print(booking_to_update_2)
