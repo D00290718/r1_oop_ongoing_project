@@ -1,22 +1,23 @@
 from datetime import date
 from .attendee import attendee
-# from .event import Event
-
+from .event import Event
+from .venue import Venue
+import datetime
 
 class Booking:
 
-    def __init__(self, booking_id, attendee, event, booking_date=None):
+    def __init__(self, booking_id, attendee_val, event_Val, booking_date=None):
 
         # Validate booking ID
         if type(booking_id) is not int or booking_id <= 0:
             raise ValueError("Booking ID must be a positive integer")
 
         # Validate attendee
-        if not isinstance(attendee, attendee):
+        if not isinstance(attendee_val, attendee):
             raise ValueError("A valid attendee object is required")
 
         # Validate event
-        if not isinstance(event, Event):
+        if not isinstance(event_Val, Event):
             raise ValueError("A valid Event object is required")
 
         # Set default booking date
@@ -32,8 +33,8 @@ class Booking:
 
         # Store attributes
         self._booking_id = booking_id
-        self._attendee = attendee
-        self._event = event
+        self._attendee = attendee_val
+        self._event = event_Val
         self._booking_date = booking_date
         self._cancelled = False
 
@@ -89,7 +90,18 @@ attendee1 = attendee(101, "Ali Khan", "ali@gmail.com")
 attendee2 = attendee(102, "Ahmed", "ahmed@gmail.com")
 
 # Assume you have already implemented Event
-event1 = Event((1, "DKIT Freshers Day One - Bingo n Beats", "convention", "2026, 9, 21", "22,00", 150, venue[0], "False", 15.000))  # Supply the required Event constructor arguments
+test_venue = Venue(venue_id = 1, name = "Brubakers, Dundalk", capacity = 150)
+event1 = Event(
+    event_id = 1,
+    title = "DKIT Freshers Day One - Bingo n Beats",
+    event_type = "convention",
+    date = datetime.date(2026, 9, 21),
+    start_time = datetime.time(22, 0),
+    capacity = 150,
+    venue = test_venue,
+    cancelled = False,
+    ticket_price = 15.00
+)
 
 # Create booking
 booking1 = Booking(501, attendee1, event1)
