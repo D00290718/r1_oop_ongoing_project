@@ -89,11 +89,11 @@ attendees = [
 # Student B - D00262411 - Each Booking should be link one of your Attendee objects with one of your Event objects
 
 bookings = [
-    booking(601, attendees[0], event[2]),
-    booking(602, attendees[1], event[4]),
-    booking(603, attendees[2], event[1]),
-    booking(604, attendees[2], event[3]),
-    booking(605, attendees[0], event[0])
+    Booking(601, attendees[0], events[2]),
+    Booking(602, attendees[1], events[4]),
+    Booking(603, attendees[2], events[1]),
+    Booking(604, attendees[2], events[3]),
+    Booking(605, attendees[0], events[0])
 ]
 
 #-- 2. Display the information:
@@ -119,13 +119,16 @@ for booking in bookings:
 
 print("------------ Invalid Email Update: ------------")
 
-attendee_to_update = attendee[0]
+attendee_to_update = attendees[0]
 
 print("\nBefore Update")
 print(attendee_to_update)
 
 email_result = attendee_to_update.update_email("khizarsiddiqui489.gmail.com")
-print("\nEmail updated Successfully")
+if email_result:
+    print("\nEmail updated successfully.")
+else:
+    print("\nEmail update failed. Invalid email address.")
 
 print("\nAfter Update")
 print(attendee_to_update)
@@ -160,15 +163,22 @@ for event in events:
 
 print("------------ Cancelled Bookings: ------------")
 
+found_cancelled_booking = False
+
 for booking in bookings:
     if booking.cancelled:
         print(booking)
+        print("--------------------------")
+        found_cancelled_booking = True
+
+if not found_cancelled_booking:
+    print("No cancelled bookings found.")
 
 # Student B - D00262411 - Find and display all bookings for a specific Attendee
 
 print("------------ Bookings for a Specific Attendee: ------------")
 
-attendee_to_find = attendees[3]
+attendee_to_find = attendees[2]
 
 print("Attendee:")
 print(attendee_to_find)
@@ -179,11 +189,10 @@ for booking in bookings:
     if booking.attendee.attendee_id == attendee_to_find.attendee_id:
         print(booking)
         print("--------------------------")
-
         found_booking = True
 
-    if not found_booking:
-        print("No bookings found for this attendee")
+if not found_booking:
+    print("No bookings found for this attendee.")
 
 # Additional Demo: Change attendee on a booking
 
@@ -194,7 +203,10 @@ print("\nBefore Update")
 print(booking_to_update_2)
 
 update_result = booking_to_update_2.change_attendee(attendees[2])
-print("Attendee updated Successfully")
 
+if update_result:
+    print("Attendee updated successfully.")
+else:
+    print("Attendee update failed.")
 print("\nAfter Update")
 print(booking_to_update_2)
