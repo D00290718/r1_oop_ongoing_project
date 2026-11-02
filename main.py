@@ -1,6 +1,6 @@
 from event_system.venue import Venue
 from event_system.event import Event
-from event_system.attendee import Attendee
+from event_system.attendee import attendee
 from event_system.booking import Booking
 import datetime
 
